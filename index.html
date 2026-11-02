@@ -51,11 +51,10 @@
       <!-- Right-Aligned Navigation Items -->
       <nav class="nav-wrapper" id="primaryNav" role="navigation" aria-label="Primary Navigation">
         <ul class="nav-links">
-          <li><a href="#story" class="nav-link">Our Story</a></li>
+          <li><a href="#story" class="nav-link">About Us</a></li>
           <li><a href="#founders" class="nav-link">Founders</a></li>
           <li><a href="#safaris" class="nav-link">Safaris</a></li>
           <li><a href="#gallery" class="nav-link">Gallery</a></li>
-          <li><a href="#itineraries" class="nav-link">Itineraries</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
@@ -75,40 +74,21 @@
         Bespoke wildlife safaris, endangered mountain gorilla trekking in ancient rainforests, and deeply personal East
         African journeys guided by lifelong native trackers.
       </p>
-
-      <div class="hero-actions">
-        <a href="#safaris" class="btn btn-primary">
-          Explore Safari Packages
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
-        </a>
-        <a href="#story" class="btn btn-outline-light">
-          Our Heritage
-        </a>
-      </div>
     </div>
   </section>
 
   <!-- ==========================================================================
-       Our Story Section
+       About Us Section
        ========================================================================== -->
   <section class="story-section" id="story">
     <div class="container">
       <div class="story-grid">
         <div class="story-visual">
-          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80"
-            alt="Scenic African Savannah and Wildlife at Golden Hour" class="story-img-main" loading="lazy">
-          <div class="story-badge-floating">
-            <span class="floating-number">Imoratok</span>
-            <p class="floating-text">Moru (Mountain) &amp; Tok (Star) &mdash; Guiding light across East Africa.</p>
-          </div>
+          <img src="images/Falls View.jpeg" alt="Scenic View of the Falls" class="story-img-main" loading="lazy">
         </div>
 
         <div class="story-content">
-          <span class="section-tag">Roots & Heritage</span>
-          <h3>The Guiding Star of East Africa</h3>
+          <h3>About Imoratok</h3>
           <p class="story-body">
             Imoratok Safaris was founded in 2020 by two Ugandan friends, Emmanuel Obyara and Paul Olweny, who share over
             15 years of combined experience working within Uganda and across East African countries. Their deep passion
@@ -126,6 +106,9 @@
             with the raw beauty and rich cultures of Uganda, Kenya, Tanzania, and Rwanda. Every safari is a personal
             story waiting to unfold.
           </p>
+          <div class="story-btn-wrapper">
+            <a href="about.html" class="btn btn-primary">Discover More About Us</a>
+          </div>
         </div>
       </div>
     </div>
@@ -137,7 +120,7 @@
        - Warm sand/cream background
        - Centered title "Meet the Founders"
        - Gold accent line
-       - 2 centered columns with circular portraits (blank for user images)
+       - 2 centered columns with circular portraits
        - Emmanuel Obyara & Paul Olweny bios
        ========================================================================== -->
   <section class="founders-section" id="founders">
@@ -150,16 +133,8 @@
       <div class="founders-grid">
         <!-- Founder 1: Emmanuel Obyara -->
         <div class="founder-card">
-          <!-- Circular Image Container (Left blank for user to add image) -->
           <div class="founder-image-wrapper">
-            <!-- USER NOTE: Drop Emmanuel Obyara's photo here: e.g. <img src="images/emmanuel.jpg" alt="Emmanuel Obyara"> -->
-            <div class="founder-image-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span class="founder-placeholder-hint">Photo</span>
-            </div>
+            <img src="images/Emma.webp" alt="Emmanuel Obyara - Co-Founder & Lead Guide">
           </div>
           <h3 class="founder-name">Emmanuel Obyara</h3>
           <p class="founder-role">Co-Founder & Lead Guide</p>
@@ -173,16 +148,8 @@
 
         <!-- Founder 2: Paul Olweny -->
         <div class="founder-card">
-          <!-- Circular Image Container (Left blank for user to add image) -->
           <div class="founder-image-wrapper">
-            <!-- USER NOTE: Drop Paul Olweny's photo here: e.g. <img src="images/paul.jpg" alt="Paul Olweny"> -->
-            <div class="founder-image-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span class="founder-placeholder-hint">Photo</span>
-            </div>
+            <img src="images/Paul.webp" alt="Paul Olweny - Co-Founder & Operations Director">
           </div>
           <h3 class="founder-name">Paul Olweny</h3>
           <p class="founder-role">Co-Founder & Operations Director</p>
@@ -207,53 +174,16 @@
         <div class="section-line"></div>
       </div>
 
-      <!-- Safaris Tiles Grid -->
-      <div class="safari-tiles-grid">
-        <article class="safari-tile">
-          <h3 class="safari-tile-title">Birding Safaris</h3>
-          <p class="safari-tile-text">
-            Uganda is home to over 1,000 bird species. Our birding safaris take you through wetlands, forests, and
-            savannas to spot the elusive Shoebill, Great Blue Turaco, African Green Broadbill, and hundreds more.
-          </p>
-        </article>
-
-        <article class="safari-tile">
-          <h3 class="safari-tile-title">Ultimate Wildlife Safaris</h3>
-          <p class="safari-tile-text">
-            Encounter the Big Five and beyond across Uganda's premier national parks. From tree-climbing lions in
-            Ishasha to herds of elephants in Queen Elizabeth NP, experience East Africa's most iconic wildlife.
-          </p>
-        </article>
-
-        <article class="safari-tile">
-          <h3 class="safari-tile-title">Primate Safaris</h3>
-          <p class="safari-tile-text">
-            Track mountain gorillas in Bwindi Impenetrable Forest and chimpanzees in Kibale. Uganda is one of the best
-            places on Earth for primate encounters, home to 13 primate species.
-          </p>
-        </article>
-
-        <article class="safari-tile">
-          <h3 class="safari-tile-title">Sport Fishing Safaris</h3>
-          <p class="safari-tile-text">
-            Cast your line into the legendary waters of the Nile and Lake Victoria. Pursue the mighty Nile Perch and
-            Tilapia while surrounded by stunning landscapes and abundant birdlife.
-          </p>
-        </article>
-
-        <article class="safari-tile">
-          <h3 class="safari-tile-title">Cultural Safaris</h3>
-          <p class="safari-tile-text">
-            Immerse yourself in Uganda's rich cultural tapestry. Visit the Batwa pygmies, the Karamojong warriors, and
-            royal kingdoms. Experience traditional dance, crafts, and ceremonies that have endured for centuries.
-          </p>
-        </article>
+      <!-- Button connecting to safari.html -->
+      <div class="safaris-btn-wrapper" style="margin-top: 36px;">
+        <a href="safari.html" class="btn btn-primary">Discover More Safaris &amp; Destinations</a>
       </div>
     </div>
   </section>
 
   <!-- ==========================================================================
        Gallery Section
+       Lively Bento Mosaic Grid
        ========================================================================== -->
   <section class="gallery-section" id="gallery">
     <div class="container">
@@ -263,87 +193,54 @@
       </div>
 
       <div class="gallery-grid">
-        <div class="gallery-item col-span-2 row-span-2">
-          <img src="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?auto=format&fit=crop&w=1200&q=80"
-            alt="Silverback Mountain Gorilla in Bwindi Impenetrable Forest" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <h4 class="gallery-caption-title">Gentle Giants of Bwindi</h4>
-            <span class="gallery-caption-loc">Bwindi Impenetrable National Park</span>
-          </div>
+        <div class="gallery-item span-large">
+          <img src="images/Animals/Lioness.jpeg" alt="Lioness Resting in Tree" class="gallery-img" loading="lazy">
         </div>
 
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80"
-            alt="Elephant herd crossing the River Nile at sunset" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <h4 class="gallery-caption-title">Nile River Crossing</h4>
-            <span class="gallery-caption-loc">Murchison Falls National Park</span>
-          </div>
+          <img src="images/Tribal/WhatsApp Image 2026-10-30 at 15.52.56.jpeg" alt="Ugandan Cultural Heritage" class="gallery-img" loading="lazy">
+        </div>
+
+        <div class="gallery-item span-tall">
+          <img src="images/Falls.jpeg" alt="Murchison Waterfalls" class="gallery-img" loading="lazy">
         </div>
 
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=800&q=80"
-            alt="Lion lounging on an acacia branch in Ishasha" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <h4 class="gallery-caption-title">Acacia Tree Climbers</h4>
-            <span class="gallery-caption-loc">Ishasha • Queen Elizabeth</span>
-          </div>
+          <img src="images/Animals/Giraffes.jpeg" alt="Rothschild Giraffes in Savannah" class="gallery-img" loading="lazy">
         </div>
 
-        <div class="gallery-item col-span-2">
-          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80"
-            alt="Golden savannah plains and zebras in Kidepo Valley" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <h4 class="gallery-caption-title">Golden Savanna Dawn</h4>
-            <span class="gallery-caption-loc">Kidepo Valley National Park</span>
-          </div>
+        <div class="gallery-item span-wide">
+          <img src="images/Hillside.jpeg" alt="Ugandan Hillside Landscape" class="gallery-img" loading="lazy">
         </div>
 
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80"
-            alt="Chimpanzee resting in Kibale canopy" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <h4 class="gallery-caption-title">Curious Eyes of Kibale</h4>
-            <span class="gallery-caption-loc">Kibale Forest National Park</span>
-          </div>
+          <img src="images/Tribal/WhatsApp Image 2026-10-30 at 15.52.57.jpeg" alt="Traditional Community Experience" class="gallery-img" loading="lazy">
         </div>
 
         <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
-            alt="Misty volcanic crater lake in Western Uganda" class="gallery-img" loading="lazy">
-          <div class="gallery-overlay">
-            <h4 class="gallery-caption-title">Volcanic Crater Lakes</h4>
-            <span class="gallery-caption-loc">Fort Portal / Kasenda</span>
-          </div>
+          <img src="images/Animals/Zebras.jpeg" alt="Zebras Grazing" class="gallery-img" loading="lazy">
+        </div>
+
+        <div class="gallery-item span-tall">
+          <img src="images/Animals/Elephants.jpeg" alt="Elephants in the Wild" class="gallery-img" loading="lazy">
+        </div>
+
+        <div class="gallery-item span-wide">
+          <img src="images/Tribal/WhatsApp Image 2026-10-30 at 15.52.58.jpeg" alt="Cultural Dance and Celebration" class="gallery-img" loading="lazy">
+        </div>
+
+        <div class="gallery-item">
+          <img src="images/Animals/Buffalo.jpeg" alt="Cape Buffalo Herd" class="gallery-img" loading="lazy">
+        </div>
+
+        <div class="gallery-item">
+          <img src="images/Huts.jpeg" alt="Traditional Village Huts" class="gallery-img" loading="lazy">
+        </div>
+
+        <div class="gallery-item span-wide">
+          <img src="images/Animals/Croc.jpeg" alt="Nile Crocodile" class="gallery-img" loading="lazy">
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Lightbox Modal -->
-  <div class="lightbox-modal" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
-    <div class="lightbox-content">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close image">&times;</button>
-      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
-      <img src="" alt="" class="lightbox-img" id="lightboxImg">
-      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#10095;</button>
-      <div class="lightbox-caption">
-        <h4 class="lightbox-title" id="lightboxTitle"></h4>
-        <p class="lightbox-location" id="lightboxLoc"></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       Featured Journeys (Itineraries) Section
-       ========================================================================== -->
-  <section class="itineraries-section" id="itineraries">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Featured Journeys</h2>
-        <div class="section-line"></div>
-      </div>
-      <!-- Content to be added later -->
     </div>
   </section>
 
@@ -371,6 +268,7 @@
             <div class="contact-item-text">
               <a href="tel:+256707407660">+256 707 407 660</a>
               <a href="tel:+256705168719">+256 705 168 719</a>
+              <a href="tel:+265762496950">+265 762 496 950</a>
             </div>
           </div>
 
@@ -407,11 +305,10 @@
         <div class="footer-quick-nav">
           <span class="quick-nav-label">Quick Navigation</span>
           <ul class="quick-nav-links">
-            <li><a href="#story">Our story</a></li>
+            <li><a href="#story">About Us</a></li>
             <li><a href="#founders">Founders</a></li>
             <li><a href="#safaris">Safaris</a></li>
             <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#itineraries">Itineraries</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
