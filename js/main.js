@@ -91,3 +91,57 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+
+  // 5. Safari Booking Inquiry Form Handler
+  const inquiryForm = document.getElementById('safariInquiryForm');
+  if (inquiryForm) {
+    inquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('inquiryName')?.value || '';
+      const email = document.getElementById('inquiryEmail')?.value || '';
+      const phone = document.getElementById('inquiryPhone')?.value || '';
+      const onWhatsApp = document.getElementById('inquiryOnWhatsApp')?.checked;
+      const contactLegacy = document.getElementById('inquiryContact')?.value || '';
+      const safari = document.getElementById('inquirySafari')?.value || '';
+      const travelers = document.getElementById('inquiryTravelers')?.value || '';
+      const message = document.getElementById('inquiryMessage')?.value || '';
+
+      const contactStr = (email || phone) 
+        ? `Email: ${email} | Phone: ${phone}${onWhatsApp ? ' (WhatsApp)' : ''}`
+        : `Contact: ${contactLegacy}`;
+
+      const text = `Hello Imoratok Safaris! My name is ${name}. I am interested in: ${safari}. ${contactStr}. Travelers/Dates: ${travelers}. Dream Safari details: ${message}`;
+      
+      // Track conversion event if gtag exists
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'Inquiry',
+          event_label: safari
+        });
+      }
+
+      // Open WhatsApp direct with pre-filled message
+      const encoded = encodeURIComponent(text);
+      const waUrl = `https://wa.me/256707407660?text=${encoded}`;
+      window.open(waUrl, '_blank');
+      
+      const successNotice = document.getElementById('formSuccessMessage');
+      if (successNotice) {
+        successNotice.style.display = 'block';
+        inquiryForm.reset();
+      }
+    });
+  }
+
+  // 6. Analytics Event Tracking for Click-to-call & WhatsApp
+  document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (typeof gtag === 'function') {
+        const isWa = link.href.includes('wa.me');
+        gtag('event', isWa ? 'whatsapp_click' : 'phone_call_click', {
+          event_category: 'Contact',
+          event_label: link.href
+        });
+      }
+    });
+  });
