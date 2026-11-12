@@ -8,6 +8,7 @@
   <meta name="description"
     content="High-octane adventure expeditions across Uganda: Grade 5 Nile white-water rafting, Mount Rwenzori &amp; Elgon climbing, and Nile Perch sport angling.">
   <link rel="canonical" href="https://imoratoksafaris.com/adventure-safaris.html">
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -23,6 +24,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Structured Data: TouristTrip Schema -->
@@ -134,9 +136,19 @@
           </div>
         </div>
 
-        <a href="index.html#inquire" class="btn btn-primary" style="padding: 14px 32px; font-size: 0.96rem;">
-          Inquire About a Custom Adventure Safari
-        </a>
+
+        <div class="safari-map-wrapper">
+          <div class="safari-map-header">
+            <span>Safari Area Map &mdash; Uganda Adventure Regions</span>
+            <span class="safari-map-hint">Click any numbered pin for stop details</span>
+          </div>
+          <div class="safari-map-container" data-safari-map="adventure-uganda"></div>
+        </div>
+        <div style="margin-top: 28px;">
+          <a href="index.html#inquire" class="btn btn-primary" style="padding: 14px 32px; font-size: 0.96rem;">
+            Inquire About a Custom Adventure Safari
+          </a>
+        </div>
       </div>
     </div>
   </main>
@@ -196,9 +208,8 @@
               </svg>
             </div>
             <div class="contact-item-text">
-              <span style="font-weight: 600;">Plot 14, Kampala Road</span>
               <span>Kampala, Uganda</span>
-              <span style="font-size: 0.88rem; color: #a4b3a9; margin-top: 4px;">Mon – Sat: 08:00 – 18:00 EAT</span>
+              <a href="https://maps.google.com/?q=Kampala+Uganda" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--color-accent); margin-top: 4px; text-decoration: underline;">View on Google Maps</a>
             </div>
           </div>
         </div>
@@ -254,6 +265,8 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="js/safari-maps.js"></script>
 </body>
 
 </html>

@@ -89,6 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
+
+  // 4b. Duplicate Gallery Track Items for Seamless Infinite Marquee
+  const galleryTrack = document.getElementById('galleryTrack');
+  if (galleryTrack) {
+    const items = Array.from(galleryTrack.children);
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      galleryTrack.appendChild(clone);
+    });
+  }
 });
 
 
