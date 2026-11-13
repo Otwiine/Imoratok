@@ -103,35 +103,28 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-  // 5. Safari Booking Inquiry Form Handler
+  // 5. Safari Booking Inquiry Form Handler (Direct WhatsApp Submission)
   const inquiryForm = document.getElementById('safariInquiryForm');
   if (inquiryForm) {
     inquiryForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('inquiryName')?.value || '';
-      const email = document.getElementById('inquiryEmail')?.value || '';
-      const phone = document.getElementById('inquiryPhone')?.value || '';
-      const onWhatsApp = document.getElementById('inquiryOnWhatsApp')?.checked;
-      const contactLegacy = document.getElementById('inquiryContact')?.value || '';
-      const safari = document.getElementById('inquirySafari')?.value || '';
-      const travelers = document.getElementById('inquiryTravelers')?.value || '';
-      const message = document.getElementById('inquiryMessage')?.value || '';
+      const name = document.getElementById('inquiryName')?.value?.trim() || '';
+      const email = document.getElementById('inquiryEmail')?.value?.trim() || '';
+      const message = document.getElementById('inquiryMessage')?.value?.trim() || '';
 
-      const contactStr = (email || phone) 
-        ? `Email: ${email} | Phone: ${phone}${onWhatsApp ? ' (WhatsApp)' : ''}`
-        : `Contact: ${contactLegacy}`;
+      let text = `Hello Imoratok Safaris! My name is ${name}`;
+      if (email) text += ` (${email})`;
+      if (message) text += `.\n\nTell us about your dream safari:\n${message}`;
 
-      const text = `Hello Imoratok Safaris! My name is ${name}. I am interested in: ${safari}. ${contactStr}. Travelers/Dates: ${travelers}. Dream Safari details: ${message}`;
-      
       // Track conversion event if gtag exists
       if (typeof gtag === 'function') {
         gtag('event', 'generate_lead', {
           event_category: 'Inquiry',
-          event_label: safari
+          event_label: name
         });
       }
 
-      // Open WhatsApp direct with pre-filled message
+      // Open WhatsApp direct with pre-filled message to +256 707 407 660
       const encoded = encodeURIComponent(text);
       const waUrl = `https://wa.me/256707407660?text=${encoded}`;
       window.open(waUrl, '_blank');
