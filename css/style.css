@@ -439,7 +439,7 @@ ol {
   padding-top: var(--nav-height);
   padding-bottom: 80px;
   background-color: #12241b;
-  background-image: url('../images/Falls/Murchison5.JPG');
+  background-image: url('../images/Falls/Murchison5.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1557,20 +1557,20 @@ ol {
 }
 
 .page-hero.classic-hero {
-  background-image: url('../images/Animals/Croc1.JPG');
+  background-image: url('../images/Animals/Croc1.jpg');
 }
 
 .page-hero.birding-hero {
-  background-image: url('../images/Animals/Bird3.JPG');
+  background-image: url('../images/Animals/Bird3.jpg');
 }
 
 .page-hero.primate-hero {
-  background-image: url('../images/Animals/Monkey1.JPG');
+  background-image: url('../images/Animals/Monkey1.jpg');
   background-position: center 15%;
 }
 
 .page-hero.faq-hero {
-  background-image: url('../images/Animals/Lowshot.JPG');
+  background-image: url('../images/Animals/Lowshot.jpg');
 }
 
 .page-hero.safaris-hero {
