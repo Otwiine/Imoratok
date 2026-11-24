@@ -149,3 +149,185 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // 7. Interactive Lightbox Modal (Carousel & Full Gallery Grid)
+  const setupGalleryLightbox = () => {
+    const galleryTrack = document.getElementById('galleryTrack');
+    const fullGallery = document.querySelector('.full-gallery-masonry');
+
+    // Only run if either gallery element is present on this page
+    if (!galleryTrack && !fullGallery) return;
+
+    // Create Lightbox DOM structure if not already present
+    let lightbox = document.getElementById('imageLightboxModal');
+    if (!lightbox) {
+      lightbox = document.createElement('div');
+      lightbox.id = 'imageLightboxModal';
+      lightbox.className = 'lightbox-modal';
+      lightbox.setAttribute('role', 'dialog');
+      lightbox.setAttribute('aria-modal', 'true');
+      lightbox.setAttribute('aria-label', 'Image preview');
+      lightbox.innerHTML = `
+        <div class="lightbox-overlay"></div>
+        <button class="lightbox-close" aria-label="Close image preview">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="lightbox-content">
+          <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div class="lightbox-image-wrap">
+            <img class="lightbox-img" src="" alt="">
+            <div class="lightbox-caption"></div>
+          </div>
+          <button class="lightbox-nav lightbox-next" aria-label="Next image">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      `;
+      document.body.appendChild(lightbox);
+    }
+
+    const overlay = lightbox.querySelector('.lightbox-overlay');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const prevBtn = lightbox.querySelector('.lightbox-prev');
+    const nextBtn = lightbox.querySelector('.lightbox-next');
+    const imgEl = lightbox.querySelector('.lightbox-img');
+    const captionEl = lightbox.querySelector('.lightbox-caption');
+
+    let activeImageList = [];
+    let currentIndex = 0;
+    let trackWasPaused = false;
+
+    const updateLightboxImage = () => {
+      if (!activeImageList.length) return;
+      const target = activeImageList[currentIndex];
+      imgEl.src = target.src;
+      imgEl.alt = target.alt || 'Safari gallery photo';
+      captionEl.textContent = target.alt || '';
+
+      if (activeImageList.length > 1) {
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+      } else {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      }
+    };
+
+    const openLightbox = (images, index, fromTrack = false) => {
+      activeImageList = images;
+      currentIndex = index;
+      trackWasPaused = fromTrack;
+
+      if (trackWasPaused && galleryTrack) {
+        galleryTrack.classList.add('is-paused');
+      }
+
+      updateLightboxImage();
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (trackWasPaused && galleryTrack) {
+        galleryTrack.classList.remove('is-paused');
+        trackWasPaused = false;
+      }
+    };
+
+    const showPrev = () => {
+      currentIndex = (currentIndex - 1 + activeImageList.length) % activeImageList.length;
+      updateLightboxImage();
+    };
+
+    const showNext = () => {
+      currentIndex = (currentIndex + 1) % activeImageList.length;
+      updateLightboxImage();
+    };
+
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showPrev();
+    });
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showNext();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+
+    // 1. Attach to Carousel Images (click stops carousel and expands image)
+    if (galleryTrack) {
+      galleryTrack.addEventListener('click', (e) => {
+        const clickedImg = e.target.closest('img');
+        if (!clickedImg) return;
+
+        const allTrackImgs = Array.from(galleryTrack.querySelectorAll('.gallery-item img'));
+        const matchIndex = allTrackImgs.findIndex(img => img.src === clickedImg.src);
+        const startIndex = matchIndex >= 0 ? matchIndex : 0;
+
+        openLightbox(allTrackImgs, startIndex, true);
+      });
+    }
+
+    // 2. Attach to Full Gallery Masonry Grid
+    if (fullGallery) {
+      fullGallery.addEventListener('click', (e) => {
+        const clickedImg = e.target.closest('img');
+        if (!clickedImg) return;
+
+        const allGalleryImgs = Array.from(fullGallery.querySelectorAll('.full-gallery-card img'));
+        const matchIndex = allGalleryImgs.indexOf(clickedImg);
+        const startIndex = matchIndex >= 0 ? matchIndex : 0;
+
+        openLightbox(allGalleryImgs, startIndex, false);
+      });
+    }
+  };
+
+  setupGalleryLightbox();
+
+  // 10. Scroll Reveal for Organic Safari Photo Slots
+  const initPhotoSlotAnimations = () => {
+    const slots = document.querySelectorAll('.safari-photo-slot.animate-on-scroll');
+    if (!slots.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      slots.forEach(slot => slot.classList.add('is-visible'));
+      return;
+    }
+
+    const slotObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.15
+    });
+
+    slots.forEach(slot => slotObserver.observe(slot));
+  };
+
+  initPhotoSlotAnimations();
