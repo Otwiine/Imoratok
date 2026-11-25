@@ -103,36 +103,67 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-  // 5. Safari Booking Inquiry Form Handler (Direct WhatsApp Submission)
+  // 5. Safari Booking Inquiry Form Handler (Web3Forms AJAX Submission)
   const inquiryForm = document.getElementById('safariInquiryForm');
   if (inquiryForm) {
-    inquiryForm.addEventListener('submit', (e) => {
+    inquiryForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('inquiryName')?.value?.trim() || '';
-      const email = document.getElementById('inquiryEmail')?.value?.trim() || '';
-      const message = document.getElementById('inquiryMessage')?.value?.trim() || '';
 
-      let text = `Hello Imoratok Safaris! My name is ${name}`;
-      if (email) text += ` (${email})`;
-      if (message) text += `.\n\nTell us about your dream safari:\n${message}`;
+      const submitBtn = document.getElementById('inquirySubmitBtn');
+      const successNotice = document.getElementById('formSuccessMessage');
+      const errorNotice = document.getElementById('formErrorMessage');
 
-      // Track conversion event if gtag exists
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', {
-          event_category: 'Inquiry',
-          event_label: name
-        });
+      if (successNotice) successNotice.style.display = 'none';
+      if (errorNotice) errorNotice.style.display = 'none';
+
+      const originalBtnText = submitBtn ? submitBtn.textContent : 'Send Inquiry';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending Inquiry...';
+        submitBtn.style.opacity = '0.75';
       }
 
-      // Open WhatsApp direct with pre-filled message to +256 707 407 660
-      const encoded = encodeURIComponent(text);
-      const waUrl = `https://wa.me/256707407660?text=${encoded}`;
-      window.open(waUrl, '_blank');
-      
-      const successNotice = document.getElementById('formSuccessMessage');
-      if (successNotice) {
-        successNotice.style.display = 'block';
-        inquiryForm.reset();
+      const formData = new FormData(inquiryForm);
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+
+        if (response.status === 200 && result.success) {
+          if (successNotice) {
+            successNotice.style.display = 'block';
+          }
+          inquiryForm.reset();
+
+          // Track conversion event if analytics gtag exists
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              event_category: 'Inquiry',
+              event_label: 'Web3Forms Lead'
+            });
+          }
+        } else {
+          if (errorNotice) {
+            errorNotice.style.display = 'block';
+          }
+        }
+      } catch (err) {
+        if (errorNotice) {
+          errorNotice.style.display = 'block';
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+          submitBtn.style.opacity = '1';
+        }
       }
     });
   }

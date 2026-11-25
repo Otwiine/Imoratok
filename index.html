@@ -530,33 +530,43 @@
       </div>
 
       <div class="quote-card">
-        <form id="safariInquiryForm">
+        <form id="safariInquiryForm" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="798baa1c-899e-4259-ba53-4696f345e349">
+          <input type="hidden" name="subject" value="New Safari Inquiry — Imoratok Safaris">
+          <input type="hidden" name="from_name" value="Imoratok Safaris Website">
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
           <div class="quote-form-grid">
             <div>
               <label for="inquiryName" class="form-label">Your Full Name *</label>
-              <input type="text" id="inquiryName" class="form-control" required>
+              <input type="text" id="inquiryName" name="name" class="form-control" placeholder="e.g. Sarah Jenkins" required>
             </div>
 
             <div>
               <label for="inquiryEmail" class="form-label">Email Address *</label>
-              <input type="email" id="inquiryEmail" class="form-control" required>
+              <input type="email" id="inquiryEmail" name="email" class="form-control" placeholder="e.g. sarah@example.com" required>
             </div>
 
             <div class="form-group-full">
-              <label for="inquiryMessage" class="form-label">Tell us about your dream safari</label>
-              <textarea id="inquiryMessage" class="form-control" rows="4" required></textarea>
+              <label for="inquiryMessage" class="form-label">Tell us about your dream safari *</label>
+              <textarea id="inquiryMessage" name="message" class="form-control" rows="4" placeholder="Destination interests, travel dates, group size, or questions..." required></textarea>
             </div>
           </div>
 
           <div class="quote-form-submit">
-            <button type="submit" class="btn btn-primary" style="padding: 14px 34px; font-size: 1rem;">
-              Plan your Safari
+            <button type="submit" id="inquirySubmitBtn" class="btn btn-primary" style="padding: 14px 34px; font-size: 1rem;">
+              Send Inquiry
             </button>
           </div>
 
           <div id="formSuccessMessage"
-            style="display: none; margin-top: 18px; padding: 14px; background: #eaf1ed; border: 1px solid #2b5441; border-radius: 6px; color: #1b382b; font-family: var(--font-sans); font-size: 0.92rem; text-align: center;">
-            ✓ Thank you! Opening WhatsApp to send your safari details...
+            style="display: none; margin-top: 18px; padding: 14px 18px; background: #eaf1ed; border: 1px solid #2b5441; border-radius: 6px; color: #1b382b; font-family: var(--font-sans); font-size: 0.95rem; text-align: center;">
+            ✓ Thank you! Your safari inquiry has been received. Our team will review your details and respond shortly.
+          </div>
+
+          <div id="formErrorMessage"
+            style="display: none; margin-top: 18px; padding: 14px 18px; background: #fdf2f2; border: 1px solid #d9534f; border-radius: 6px; color: #a94442; font-family: var(--font-sans); font-size: 0.95rem; text-align: center;">
+            ✕ Something went wrong sending your message. Please reach us directly at <a href="mailto:info@imoratoksafaris.com" style="text-decoration: underline; color: inherit; font-weight: 600;">info@imoratoksafaris.com</a>.
           </div>
         </form>
       </div>
