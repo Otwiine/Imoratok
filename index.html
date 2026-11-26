@@ -46,6 +46,9 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- Cloudflare Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <!-- Structured Data: JSON-LD (Entity, LocalBusiness, FAQPage) -->
   <script type="application/ld+json">
   {
@@ -528,10 +531,7 @@
       </div>
 
       <div class="quote-card">
-        <form id="safariInquiryForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="798baa1c-899e-4259-ba53-4696f345e349">
-          <input type="hidden" name="subject" value="New Safari Inquiry — Imoratok Safaris">
-          <input type="hidden" name="from_name" value="Imoratok Safaris Website">
+        <form id="safariInquiryForm" action="submit.php" method="POST">
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
           <div class="quote-form-grid">
@@ -552,6 +552,11 @@
             </div>
           </div>
 
+          <!-- Cloudflare Turnstile CAPTCHA Widget -->
+          <div style="display: flex; justify-content: center; margin: 20px 0 10px;">
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAGUNYS9RggtNDIPE" data-theme="light"></div>
+          </div>
+
           <div class="quote-form-submit">
             <button type="submit" id="inquirySubmitBtn" class="btn btn-primary"
               style="padding: 14px 34px; font-size: 1rem;">
@@ -566,7 +571,7 @@
 
           <div id="formErrorMessage"
             style="display: none; margin-top: 18px; padding: 14px 18px; background: #fdf2f2; border: 1px solid #d9534f; border-radius: 6px; color: #a94442; font-family: var(--font-sans); font-size: 0.95rem; text-align: center;">
-            ✕ Something went wrong sending your message. Please reach us directly at <a
+            ✕ <span id="formErrorText">Something went wrong sending your message. Please reach us directly at</span> <a
               href="mailto:info@imoratoksafaris.com"
               style="text-decoration: underline; color: inherit; font-weight: 600;">info@imoratoksafaris.com</a>.
           </div>

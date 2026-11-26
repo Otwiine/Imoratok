@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-  // 5. Safari Booking Inquiry Form Handler (Web3Forms AJAX Submission)
+  // 5. Safari Booking Inquiry Form Handler (PHP & Cloudflare Turnstile Submission)
   const inquiryForm = document.getElementById('safariInquiryForm');
   if (inquiryForm) {
     inquiryForm.addEventListener('submit', async (e) => {
@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = document.getElementById('inquirySubmitBtn');
       const successNotice = document.getElementById('formSuccessMessage');
       const errorNotice = document.getElementById('formErrorMessage');
+      const errorText = document.getElementById('formErrorText');
 
       if (successNotice) successNotice.style.display = 'none';
       if (errorNotice) errorNotice.style.display = 'none';
@@ -126,37 +127,59 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = new FormData(inquiryForm);
 
       try {
-        const response = await fetch('https://api.web3forms.com/submit', {
+        const response = await fetch('submit.php', {
           method: 'POST',
           body: formData,
           headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
           }
         });
 
-        const result = await response.json();
+        const rawText = await response.text();
+        let result = null;
+        try {
+          result = JSON.parse(rawText);
+        } catch (_) {
+          console.error('Non-JSON response received from submit.php:', rawText);
+        }
 
-        if (response.status === 200 && result.success) {
+        if (response.ok && result && result.success) {
           if (successNotice) {
             successNotice.style.display = 'block';
           }
           inquiryForm.reset();
 
+          // Reset Turnstile widget if present
+          if (window.turnstile && typeof turnstile.reset === 'function') {
+            try { turnstile.reset(); } catch (_) {}
+          }
+
           // Track conversion event if analytics gtag exists
           if (typeof gtag === 'function') {
             gtag('event', 'generate_lead', {
               event_category: 'Inquiry',
-              event_label: 'Web3Forms Lead'
+              event_label: 'PHP Form Lead'
             });
           }
         } else {
           if (errorNotice) {
+            if (errorText && result && result.message) {
+              errorText.textContent = result.message + ' Please reach us directly at';
+            }
             errorNotice.style.display = 'block';
+          }
+          if (window.turnstile && typeof turnstile.reset === 'function') {
+            try { turnstile.reset(); } catch (_) {}
           }
         }
       } catch (err) {
+        console.error('Fetch error submitting inquiry:', err);
         if (errorNotice) {
           errorNotice.style.display = 'block';
+        }
+        if (window.turnstile && typeof turnstile.reset === 'function') {
+          try { turnstile.reset(); } catch (_) {}
         }
       } finally {
         if (submitBtn) {
